@@ -2,23 +2,20 @@
 <html lang="pt-br" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Exercicio 05</title>
     <style media="screen">
-      body{
+      body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align:center;
+        text-align: center;
       }
-
-      .resultados{
+      .resultados {
         display: flex;
       }
-
-      .radioButtons{
+      .radioButtons {
         display: flex;
       }
-
       #containerEnviar.disabled #blockEnviar {
        display: block;
       }
@@ -28,15 +25,23 @@
      #containerEnviar #blockEnviar {
        display: none;
       }
-
-      .quadro{
-        display: block;
+      #quadro {
+        display: flex;
+        flex-direction: column;
+        white-space: pre;
       }
-
-      .formID {
+      #formID {
         display: flex;
         flex-direction: column;
         align-items: center;
+      }
+      #botao {
+        display: flex;
+        margin: 20px 0px 0px 0px;
+      }
+      #btnRecomecar {
+        display: flex;
+        margin: 10px 0px 0px 0px;
       }
     </style>
   </head>
@@ -59,22 +64,20 @@
         <div class="">
           Seus pontos:
         </div>
-        <div id="pontos">
-
-        </div>
-      <p>Digite a quantidade de pontos que quer apostar!</p>
+        <div id="pontos"></div>
       </div>
-      <input type="text" name="" id="pontosApostados" value="" placeholder="Digite o valor da aposta...">
+      <p>Digite a quantidade de pontos que quer apostar!</p>
+      <input type="text" name="" id="pontosApostados" value="" placeholder="Digite o valor da aposta..." required="required">
       <p>Você acha que o número sorteado vai ser PAR ou IMPAR ?</p>
       <div class="radioButtons">
         <input type="radio" name="imparOuPar" value="" id="par">Par
         <input type="radio" name="imparOuPar" value="" id="impar">Impar
       </div>
-
       <div class="opcao" id="containerEnviar">
-         <button type="button" name="button" id="botao">Jogar</button>
-         <div id="blockEnviar"></div>
-       </div>
+        <button type="button" name="button" id="botao">Jogar</button>
+        <div id="blockEnviar"></div>
+      </div>
+      <button type="button" name="button2" id="btnRecomecar">Recomeçar</button>
       <div id="quadro">
         Numero Sorteado: <div id="numeroAleatorio"></div>
         Resultado: <div id="resultadoNumero"></div>
@@ -83,28 +86,29 @@
 
 
     <script>
-      var pontos = 100;
+      var pontos = parseInt(100);
       document.getElementById("pontos").innerHTML = pontos;
       document.getElementById("botao").addEventListener("click", apostar);
-
+      document.getElementById("btnRecomecar").addEventListener("click", recomecar);
       var resultadoNumero;
-      function apostar(){
-
+      function apostar() {
         var valorAposta = parseInt(document.getElementById("pontosApostados").value);
         var numAleatorio = Math.floor((Math.random() * 30) + 1);
-        if (valorAposta <= 0) {
+        if (valorAposta <= 0 || !parseInt(valorAposta)) {
           alert("Você deve apostar apenas saldo positivo");
           document.getElementById("quadro").style.display = "none";
-        }else if(valorAposta > pontos){
+          document.getElementById("botao").disabled=true;
+        } else if (valorAposta > pontos) {
           alert("Você não pode apostar mais do que possui!");
           document.getElementById("quadro").style.display = "none";
-        }else if((document.getElementById("par").checked == false) && (document.getElementById("impar").checked == false)){
+          document.getElementById("botao").disabled=true;
+        } else if ((document.getElementById("par").checked == false) && (document.getElementById("impar").checked == false)) {
           alert("Você deve preencher os campos!");
           document.getElementById("quadro").style.display = "none";
-        }else if((numAleatorio % 2 == 0) && (document.getElementById("par").checked == true)) {
+        } else if ((numAleatorio % 2 == 0) && (document.getElementById("par").checked == true)) {
           resultadoNumero = "Você acertou! O numero é par! Ganhou " + valorAposta + " pontos!";
           pontos = valorAposta + pontos;
-        }else if((numAleatorio % 2 !== 0) && (document.getElementById("impar").checked == true)){
+        } else if ((numAleatorio % 2 !== 0) && (document.getElementById("impar").checked == true)) {
           resultadoNumero = "Você acertou! O numero é impar! Ganhou " + valorAposta + " pontos!";
           pontos += valorAposta;
         } else {
@@ -114,9 +118,11 @@
         document.getElementById("numeroAleatorio").innerHTML = numAleatorio;
         document.getElementById("resultadoNumero").innerHTML = resultadoNumero;
         document.getElementById("pontos").innerHTML = pontos;
-        console.log(valorAposta);
       }
-
+      function recomecar() {
+        window.location.reload();
+      }
     </script>
+
   </body>
 </html>
