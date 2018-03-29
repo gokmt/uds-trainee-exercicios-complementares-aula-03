@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercício 03</title>
+    <style>
+      .principal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button{
+        margin-top: 10px;
+      }
+
+      #cartao {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        color: white;
+      }
+
+      .textoCartao {
+        text-align: center;
+        margin: 50px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .textoAlinhado{
+        display: flex;
+
+      }
+
+      .corTexto{
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="principal">
+        <div class="">
+            <p> Vamos criar um gerador de cartão de visita.
+              O usuário deve preencher um formulário com os campos nome, telefone e endereço.
+              Ao enviar o formulário deve-se apresentar uma div formatada como um
+              cartão de visita apresentando as informações preenchidas previamente.</p>
+        </div>
+
+        <form>
+          <label for="campoNome">Nome:</label>
+          <input type="text" name="" value="" id="campoNome">
+          <label for="campoTelefone">Telefone:</label>
+          <input type="text" name="" value="" id="campoTelefone">
+          <label for="campoLogradouro">Logradouro:</label>
+          <input type="text" name="" value="" id="campoLogradouro">
+          <label for="campoNumero">Numero:</label>
+          <input type="text" name="" value="" id="campoNumero">
+          <label for="campoBairro">Bairro:</label>
+          <input type="text" name="" value="" id="campoBairro">
+          <label for="campoCEP">CEP:</label>
+          <input type="text" name="" value="" id="campoCEP">
+          <label for="campoCidade">Cidade:</label>
+          <input type="text" name="" value="" id="campoCidade">
+          <label for="campoEstado">Estado:</label>
+          <input type="text" name="" value="" id="campoEstado">
+          <button type="button" name="button" id="botao">Enviar</button>
+        </form>
+        <div id="cartao">
+          <div class="textoCartao">
+            <div class="textoAlinhado">
+              <p class="corTexto">Nome completo: &nbsp</p> <p id="nomeCompleto"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Telefone: &nbsp</p><p id="telefone"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Logradouro: &nbsp</p><p id="logradouro"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Número: &nbsp</p><p id="numero"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Bairro: &nbsp</p><p id="bairro"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">CEP: &nbsp</p><p id="cep"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Cidade: &nbsp</p><p id="cidade"></p>
+            </div>
+            <div class="textoAlinhado">
+              <p class="corTexto">Estado: &nbsp</p><p id="estado"></p>
+            </div>
+
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
+
+
+
+<script>
+  document.getElementById("botao").addEventListener("click", mostrar);
+
+  function mostrar(){
+    var dadosPessoais = {
+      nomeCompleto: document.getElementById("campoNome").value,
+      telefone: document.getElementById("campoTelefone").value,
+      endereco:{
+        logradouro:document.getElementById("campoLogradouro").value,
+        numero:document.getElementById("campoNumero").value,
+        bairro:document.getElementById("campoBairro").value,
+        cep:document.getElementById("campoCEP").value,
+        cidade:document.getElementById("campoCidade").value,
+        estado:document.getElementById("campoEstado").value
+      }
+    }
+    document.getElementById("cartao").style.backgroundColor = "pink";
+    document.getElementById("nomeCompleto").innerHTML = dadosPessoais.nomeCompleto;
+    document.getElementById("telefone").innerHTML = dadosPessoais.telefone;
+    document.getElementById("logradouro").innerHTML = dadosPessoais.endereco.logradouro;
+    document.getElementById("numero").innerHTML = dadosPessoais.endereco.numero;
+    document.getElementById("bairro").innerHTML = dadosPessoais.endereco.bairro;
+    document.getElementById("cep").innerHTML = dadosPessoais.endereco.cep;
+    document.getElementById("cidade").innerHTML = dadosPessoais.endereco.cidade;
+    document.getElementById("estado").innerHTML = dadosPessoais.endereco.estado;
+    document.getElementById("cartao").style.color = "black";
+  }
+
+</script>
